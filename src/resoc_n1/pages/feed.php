@@ -95,7 +95,7 @@
                                      'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
                     
                     $time = strtotime($post['created']);
-                    $month = $month_eng_to_fr[date('m',$time)];
+                    $month = $month_eng_to_fr[date('n',$time)];
                 ?>                
                 <article>
                     <h3>
