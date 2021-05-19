@@ -74,11 +74,8 @@
                 }
                 $user = $lesInformations->fetch_assoc();
 
-                /**
-                 * Etape 4: à vous de jouer
-                 */
-                //@todo: afficher le résultat de la ligne ci dessous, remplacer les valeurs ci-après puiseffacer la ligne ci-dessous
-                echo "<pre>" . print_r($user, 1) . "</pre>";
+                
+                
                 ?>                
                 <article class='parameters'>
                     <h3>Mes paramètres</h3>

@@ -90,16 +90,12 @@
                     $time = strtotime($post['created']);
                     $month = $month_eng_to_fr[date('m',$time)];
 
-                    // @todo : Votre mission c'est de remplacer les AREMPLACER par les bonnes valeurs
-                    // ci-dessous par les bonnes valeurs cachées dans la variable $post 
-                    // on vous met le pied à l'étrier avec created
-                    // 
-                    // avec le ? > ci-dessous on sort du mode php et on écrit du html comme on veut... mais en restant dans la boucle
+                    
                     ?>
                     <article>
                         <h3>
                             <time><?php echo date('d ',$time).$month. date(' Y à H\hi', $time)?></time>
-                            <!-- format de date à modifier -->
+                           
                         </h3>
                         <address>par <?php echo $post['author_name']?></address>
                         <div>
@@ -111,8 +107,8 @@
                         </footer>
                     </article>
                     <?php
-                    // avec le <?php ci-dessus on retourne en mode php 
-                }// cette accolade ferme et termine la boucle while ouverte avant.
+                    
+                }
                 ?>
 
             </main>
