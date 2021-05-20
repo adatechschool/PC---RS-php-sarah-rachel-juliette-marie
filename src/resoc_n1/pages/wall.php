@@ -70,6 +70,7 @@
                 $laQuestionEnSql = "SELECT `posts`.`content`,"
                         . "`posts`.`created`,"
                         . "`users`.`alias` as author_name,  "
+                        . "`posts` . `user_id` as author_id, "
                         . "count(`likes`.`id`) as like_number,  "
                         . "GROUP_CONCAT(DISTINCT `tags`.`label`) AS taglist "
                         . "FROM `posts`"

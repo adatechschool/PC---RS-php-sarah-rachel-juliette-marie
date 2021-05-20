@@ -60,6 +60,7 @@
                 $laQuestionEnSql = "SELECT `posts`.`content`,"
                         . "`posts`.`created`,"
                         . "`users`.`alias` as author_name,  "
+                        . "`posts` . `user_id` as author_id, "
                         . "count(`likes`.`id`) as like_number,  "
                         . "GROUP_CONCAT(DISTINCT `tags`.`label`) AS taglist "
                         . "FROM `posts`"
@@ -94,10 +95,12 @@
                     ?>
                     <article>
                         <h3>
-                            <time><?php echo date('d ',$time) . $month . date(' Y à H\hi', $time)?></time>
-                           
+                            
                         </h3>
-                        <address>par <?php echo $post['author_name']?></address>
+                        <address>
+                        par 
+                        <a href="wall.php?user_id=<?php echo $post['author_id'] ?>"><?php echo $post['author_name']?> </a>
+                        </address>
                         <div>
                             <p><?php echo $post['content']?></p>
                         </div>
