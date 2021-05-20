@@ -60,6 +60,12 @@
                     <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias']?>
                         (n° <?php echo $_GET['user_id'] ?>)
                     </p>
+                    <form action="" method="post">
+                    <p>Votre commentaire : <input type="text" name="comment" /></p>
+                    <p><input type="submit" value="OK"></p>
+                    </form>
+                    Bonjour, <?php echo htmlspecialchars($_GET['user_id']); ?>.
+                    Dernier commentaire : <?php echo $_GET['comment']; ?>.
                 </section>
             </aside>
             <main>
