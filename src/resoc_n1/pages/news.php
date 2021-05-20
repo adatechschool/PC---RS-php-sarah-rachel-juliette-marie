@@ -94,7 +94,7 @@
                     ?>
                     <article>
                         <h3>
-                            <time><?php echo date('d ',$time).$month. date(' Y à H\hi', $time)?></time>
+                            <time><?php echo date('d ',$time) . $month . date(' Y à H\hi', $time)?></time>
                            
                         </h3>
                         <address>par <?php echo $post['author_name']?></address>

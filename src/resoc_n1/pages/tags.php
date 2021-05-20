@@ -94,7 +94,8 @@
                 while ($post = $lesInformations->fetch_assoc())
                 {
 
-                    echo "<pre>" . print_r($post, 1) . "</pre>";
+                    
+                    
                     $month_eng_to_fr = [1 => 'janvier','février', 'mars', 'avril', 'mai','juin',
                     'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
    
