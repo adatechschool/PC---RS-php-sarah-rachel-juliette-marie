@@ -75,7 +75,7 @@ session_start();
                         $res = $mysqli->query($lInstructionSql);
                         $user = $res->fetch_assoc();
                 
-                        if ( ! $user OR md5($user["password"]) != $passwdAVerifier)
+                        if ( ! $user OR ($user["password"]) != $passwdAVerifier)
                          {
                             echo "La connexion a échoué.";
                         } else
