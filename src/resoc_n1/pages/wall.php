@@ -113,7 +113,7 @@
                         <div>
                             <p><?php echo $post['content']?></p>
                            
-                        </div>                                            
+                        </div>                                             -->
                         <footer>
                             <small>♥ <?php echo $post['like_number']?></small>
                             <a href="">#<?php echo implode (" , #", explode(",", $post['taglist'])) ?></a>
