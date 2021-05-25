@@ -46,7 +46,11 @@
                     {
                         // on ne fait ce qui suit que si un formulaire a été soumis.
                         // Etape 2: récupérer ce qu'il y a dans le formulaire 
+<<<<<<< HEAD
                 
+=======
+                        // et complétez le code ci dessous en remplaçant les ???
+>>>>>>> test_rachel
                         $new_email = $_POST['email'];
                         $new_alias = $_POST['pseudo'];
                         $new_passwd = $_POST['motpasse'];
@@ -82,7 +86,6 @@
                     }
                     ?>                     
                     <form action="registration.php" method="post">
-                        <input type='hidden'name='???' value='achanger'>
                         <dl>
                             <dt><label for='pseudo'>Pseudo</label></dt>
                             <dd><input type='text'name='pseudo'></dd>
