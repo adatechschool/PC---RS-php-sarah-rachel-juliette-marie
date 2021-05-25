@@ -106,7 +106,7 @@
                     
                     ?>                
                     <article>
-                        <h3>
+                        <!-- <h3>
                             <time><?php echo date('d ',$time) . $month . date(' Y à H\hi', $time)?></time>
                         </h3>
                         <address><?php echo $post['author_name']?></address>
@@ -118,7 +118,7 @@
                             <small>♥ <?php echo $post['like_number']?></small>
                             <a href="">#<?php echo implode (" , #", explode(",", $post['taglist'])) ?></a>
                             
-                        </footer>
+                        </footer> -->
                     </article>
                 <?php } ?>
 
