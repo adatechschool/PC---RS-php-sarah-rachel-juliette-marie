@@ -86,7 +86,6 @@ session_start();
                     }
                     ?>                     
                     <form action="login.php" method="post">
-                        <input type='hidden'name='???' value='achanger'>
                         <dl>
                             <dt><label for='email'>E-Mail</label></dt>
                             <dd><input type='email'name='email'></dd>
