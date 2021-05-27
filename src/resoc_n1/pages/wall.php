@@ -64,8 +64,7 @@
                     <p>Votre commentaire : <input type="text" name="comment" /></p>
                     <p><input type="submit" value="OK"></p>
                     </form>
-                    Bonjour, <?php echo htmlspecialchars($_GET['user_id']); ?>.
-                    Dernier commentaire : <?php echo $_GET['comment']; ?>.
+                    Dernier commentaire : <?php echo htmlspecialchars($_POST['comment']); ?>
                 </section>
             </aside>
             <main>
@@ -102,9 +101,29 @@
                     
                 $time = strtotime($post['created']);
                 $month = $month_eng_to_fr[date('n',$time)];
+                    ?> 
 
-                    
-                    ?>                
+                    <article>
+                        <h3>
+                            <time><?php 
+                            $jour = date('d');
+                            $annee = date('Y');
+                            $heure = date('H');
+                            $minute = date('i');
+                            echo $jour . ' ' . $month . ' ' . $annee . ' à ' . $heure. 'h' . $minute;
+                            ?></time>
+                        </h3>
+                        <address><?php echo $post['author_name']?></address>
+                        <div>
+                            <p><?php echo $_POST['comment'];?></p>
+                           
+                        </div>                                            
+                        <footer>
+                            <small>♥ <?php echo $post['like_number']?></small>
+                            <a href="">#<?php echo implode (" , #", explode(",", $post['taglist'])) ?></a>
+                            
+                        </footer>
+                    </article>
                     <article>
                         <h3>
                             <time><?php echo date('d ',$time) . $month . date(' Y à H\hi', $time)?></time>
