@@ -40,17 +40,32 @@
             </aside>
             <main class='contacts'>
                 <?php
+ 
                 // Etape 1: récupérer l'id de l'utilisateur
                 $userId = $_GET['user_id'];
                 // Etape 2: se connecter à la base de donnée
                 $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
+                //Insérer les nouveaux abonnements
+
+                $followedId = $_POST['followId'];
+    
+
+                $sql = "INSERT INTO followers (followed_user_id, following_user_id) VALUES ($followedId, $userId)"; 
+                // if ($mysqli->query($sql) === TRUE) {
+                //     echo "New record created successfully";
+                //   } else {
+                //     echo "Error: " . $sql . "<br>" . $mysqli->error;
+                //   }
+                  
                 // Etape 3: récupérer le nom de l'utilisateur
+
                 $laQuestionEnSql = "SELECT `users`.* "
                         . "FROM `followers` "
                         . "LEFT JOIN `users` ON `users`.`id`=`followers`.`followed_user_id` "
                         . "WHERE `followers`.`following_user_id`='" . intval($userId) . "'"
                         . "GROUP BY `users`.`id`"
                 ;
+
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 
                 // Etape 4: à vous de jouer
@@ -65,6 +80,9 @@
                 </article>
                 <?php
                 }
+
+                $mysqli->close();
+
                 ?>
             </main>
         </div>

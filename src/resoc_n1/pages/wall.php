@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -51,20 +54,81 @@
                 $laQuestionEnSql = "SELECT * FROM `users` WHERE id=" . intval($userId);
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 $user = $lesInformations->fetch_assoc();
-                
-                
+                 
                 ?>
                 <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
                 <section>
                     <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias']?>
-                        (n° <?php echo $_GET['user_id'] ?>)
+                    <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
+                        (n° <?php echo $userId ?>)
                     </p>
-                    <form action="" method="post">
-                    <p>Votre commentaire : <input type="text" name="comment" /></p>
-                    <p><input type="submit" value="OK"></p>
-                    </form>
-                    Dernier commentaire : <?php echo htmlspecialchars($_POST['comment']); ?>
+                </section>
+                <section>
+                <h2>Poster un message</h2>
+                <form action="" method="post">
+                        <input type='hidden' name='form' value=''>
+                        <dl>
+                            <dt><label for='message'>Message</label></dt>
+                            <dd><textarea name='message'></textarea></dd>
+                        </dl>
+                        <input type='submit'>
+                    </form>  
+                    <?php
+                    /**
+                     * TRAITEMENT DU FORMULAIRE
+                     */
+                    // Etape 1 : vérifier si on est en train d'afficher ou de traiter le formulaire
+                    // si on recoit un champs email rempli il y a une chance que ce soit un traitement
+                    $enCoursDeTraitement = isset($_POST['message']);
+                    if ($enCoursDeTraitement)
+                    {
+                        // on ne fait ce qui suit que si un formulaire a été soumis.
+                        // Etape 2: récupérer ce qu'il y a dans le formulaire
+                        // et complétez le code ci dessous en remplaçant les ???
+                        $authorId = $_SESSION['connected_id'];
+                        $postContent = $_POST['message'];
+
+
+                        //Etape 3 : Petite sécurité
+                        // pour éviter les injection sql : https://www.w3schools.com/sql/sql_injection.asp
+                        $authorId = intval($mysqli->real_escape_string($authorId));
+                        $postContent = $mysqli->real_escape_string($postContent);
+                        //Etape 4 : construction de la requete
+                        $lInstructionSql = "INSERT INTO `posts` (`id`, `user_id`, `content`, `created`) "
+                                . "VALUES (NULL, "
+                                . "'" . $authorId . "', "
+                                . "'" . $postContent . "', "
+                                . "NOW() "
+                                . ");";
+                        // echo $lInstructionSql;
+                        // Etape 5 : execution
+                        $ok = $mysqli->query($lInstructionSql);
+                        if ( ! $ok)
+                        {
+                            echo "Impossible d'ajouter le message: " . $mysqli->error;
+                        } else
+                        {
+                            echo "Message posté en tant que : " . $listAuteurs[$authorId];
+                        }
+                    }
+                    ?>                     
+             
+                </section>
+                <section>
+
+                    <?php
+                    $connectedUser = $_SESSION['connected_id'];
+                    if ($connectedUser != $userId)
+                    {
+                        ?> <h2>S'abonner</h2>
+                        <form action="subscriptions.php?user_id= <?php echo $connectedUser ?>" method="post">
+                                <input type='submit' value="je m'abonne">
+                                <input type="hidden" id="followId" name="followId" value= <?php echo $userId ?>>
+                            </form>   
+                            <?php
+                    }
+                    ?>                     
+             
                 </section>
             </aside>
             <main>
@@ -103,44 +167,23 @@
                 $month = $month_eng_to_fr[date('n',$time)];
                     ?> 
 
+
                     <article>
                         <h3>
-                            <time><?php 
-                            $jour = date('d');
-                            $annee = date('Y');
-                            $heure = date('H');
-                            $minute = date('i');
-                            echo $jour . ' ' . $month . ' ' . $annee . ' à ' . $heure. 'h' . $minute;
-                            ?></time>
-                        </h3>
-                        <address><?php echo $post['author_name']?></address>
-                        <div>
-                            <p><?php echo $_POST['comment'];?></p>
-                           
-                        </div>                                            
-                        <footer>
-                            <small>♥ <?php echo $post['like_number']?></small>
-                            <a href="">#<?php echo implode (" , #", explode(",", $post['taglist'])) ?></a>
-                            
-                        </footer>
-                    </article>
-                    <article>
-                        <!-- <h3>
                             <time><?php echo date('d ',$time) . $month . date(' Y à H\hi', $time)?></time>
                         </h3>
                         <address><?php echo $post['author_name']?></address>
                         <div>
                             <p><?php echo $post['content']?></p>
                            
-                        </div>                                             -->
+                        </div>                                            
                         <footer>
                             <small>♥ <?php echo $post['like_number']?></small>
                             <a href="">#<?php echo implode (" , #", explode(",", $post['taglist'])) ?></a>
                             
-                        </footer> -->
+                        </footer> 
                     </article>
                 <?php } ?>
-
 
             </main>
         </div>
